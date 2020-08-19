@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "tanyaDataFactory"
+		},
+		"LinkSQLDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LinkSQLDB'"
+		},
+		"Link_Blob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Link_Blob'"
+		},
+		"Link_Gen_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Link_Gen'"
+		},
+		"Link_Lake_Gen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Link_Lake_Gen2'"
+		},
+		"Link_Lake_Gen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://tanyadls2.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "tanyaDataFactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LinkSQLDB_connectionString": {
+						"value": "[parameters('LinkSQLDB_connectionString')]"
+					},
+					"Link_Blob_connectionString": {
+						"value": "[parameters('Link_Blob_connectionString')]"
+					},
+					"Link_Gen_connectionString": {
+						"value": "[parameters('Link_Gen_connectionString')]"
+					},
+					"Link_Lake_Gen2_accountKey": {
+						"value": "[parameters('Link_Lake_Gen2_accountKey')]"
+					},
+					"Link_Lake_Gen2_properties_typeProperties_url": {
+						"value": "[parameters('Link_Lake_Gen2_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "tanyaDataFactory"
+		},
+		"LinkSQLDB_connectionString": {
+			"value": ""
+		},
+		"Link_Blob_connectionString": {
+			"value": ""
+		},
+		"Link_Gen_connectionString": {
+			"value": ""
+		},
+		"Link_Lake_Gen2_accountKey": {
+			"value": ""
+		},
+		"Link_Lake_Gen2_properties_typeProperties_url": {
+			"value": "https://tanyadls2.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
