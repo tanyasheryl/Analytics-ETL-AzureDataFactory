@@ -1,0 +1,29 @@
+{
+	"name": "Books_blob_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Link_Blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "books.csv",
+				"container": "books"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "\"ISBN;\"\"Book-Title \"\";\"\"Book-Author\"\";\"\"Year-Of-Publication\"\";\"\"Publisher\"\";\"\"Image-URL-S\"\";\"\"Image-URL-M\"\";\"\"Image-URL-L\"\"\"",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

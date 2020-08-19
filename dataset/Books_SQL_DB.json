@@ -1,0 +1,17 @@
+{
+	"name": "Books_SQL_DB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkSQLDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "books"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

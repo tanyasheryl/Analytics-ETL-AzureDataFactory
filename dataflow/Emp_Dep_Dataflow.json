@@ -1,0 +1,39 @@
+{
+	"name": "Emp_Dep_Dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DepartmentDataset",
+						"type": "DatasetReference"
+					},
+					"name": "Department"
+				},
+				{
+					"dataset": {
+						"referenceName": "EmployeeDataset",
+						"type": "DatasetReference"
+					},
+					"name": "Employee"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "EmpDeptDataset",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDept"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmployeeDeptJoin"
+				}
+			],
+			"script": "source(output(\n\t\tDept_id as string,\n\t\tDept_name as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Department\nsource(output(\n\t\tEmp_id as string,\n\t\tEmp_name as string,\n\t\tDept_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Employee\nEmployee, Department join(Employee@Dept_id == Department@Dept_id,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> EmployeeDeptJoin\nEmployeeDeptJoin sink(input(\n\t\tDept_id as string,\n\t\tDept_name as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['empdept.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> EmpDept"
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"name": "Books_Archive_DLGen2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Link_Lake_Gen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "books.csv",
+				"folderPath": {
+					"value": "books_@{formatDateTime(utcnow(),'yyyy_MM_dd')}",
+					"type": "Expression"
+				},
+				"fileSystem": "books"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
