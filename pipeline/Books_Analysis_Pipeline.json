@@ -212,7 +212,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "Pipeline finished!",
 						"ErrorMessage": "Everything is okey-dokey!",
-						"EmailTo": "myemail@outlook.com"
+						"EmailTo": "tanyasheryl@outlook.com"
 					}
 				}
 			}
