@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Link_Blob'"
 		},
+		"Link_Databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Link_Databricks'"
+		},
 		"Link_Gen_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Link_Gen'"
@@ -257,8 +261,39 @@
 								"EmailTo": "tanyasheryl@outlook.com"
 							}
 						}
+					},
+					{
+						"name": "booksAnalysis",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/tanya.sheryl@crusolve.com/booksAnalysis",
+							"baseParameters": {
+								"input": {
+									"value": "@pipeline().parameters.name",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "Link_Databricks",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
+				"parameters": {
+					"name": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"lastPublishTime": "2020-08-17T02:12:23Z"
 			},
@@ -266,7 +301,8 @@
 				"[concat(variables('factoryId'), '/datasets/Books_blob_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/Books_Destination_DLGen2')]",
 				"[concat(variables('factoryId'), '/datasets/Books_Archive_DLGen2')]",
-				"[concat(variables('factoryId'), '/datasets/Books_SQL_DB')]"
+				"[concat(variables('factoryId'), '/datasets/Books_SQL_DB')]",
+				"[concat(variables('factoryId'), '/linkedServices/Link_Databricks')]"
 			]
 		},
 		{
@@ -773,6 +809,24 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('Link_Blob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Link_Databricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-2615244079172676.16.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Link_Databricks_accessToken')]"
+					},
+					"existingClusterId": "0820-154615-rifts184"
 				}
 			},
 			"dependsOn": []

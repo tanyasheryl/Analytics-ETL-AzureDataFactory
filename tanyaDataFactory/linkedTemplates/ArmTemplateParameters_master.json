@@ -11,6 +11,9 @@
 		"Link_Blob_connectionString": {
 			"value": ""
 		},
+		"Link_Databricks_accessToken": {
+			"value": ""
+		},
 		"Link_Gen_connectionString": {
 			"value": ""
 		},

@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Link_Blob'"
 		},
+		"Link_Databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Link_Databricks'"
+		},
 		"Link_Gen_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Link_Gen'"
@@ -59,6 +63,9 @@
 					},
 					"Link_Blob_connectionString": {
 						"value": "[parameters('Link_Blob_connectionString')]"
+					},
+					"Link_Databricks_accessToken": {
+						"value": "[parameters('Link_Databricks_accessToken')]"
 					},
 					"Link_Gen_connectionString": {
 						"value": "[parameters('Link_Gen_connectionString')]"
